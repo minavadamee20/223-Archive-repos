@@ -1,0 +1,100 @@
+page 371.3 appears to have good information about how to finish project 1. also the only things that count are the midterm and the final exam
+
+
+In the interface class declare
+  Color color200 = Color.Pink;
+  Color color400 = Color.Pink;
+  Color color600 = Color.Pink;
+  Color c        = Color.Pink;
+  int radians    = 200;
+let's make the eventhandler for green button
+  greenbutton.Click += EventHandler(Greenclick);
+  bluebutton.Click += EventHandler(BlueClick);
+but what does greenclick function do?
+  preotected void Greenclick(Object, EventArgs e){
+    c=Color.Green;
+  }
+  protected void BlueClick(Object, EventArgs e){
+    c=Color.Blue;
+  }
+let's say we click on a radius now....
+  protected void Rad200(Object, EventArgs e) //we don't use the parameters but they still have to be there
+    {
+      radius = 200;
+    }
+  radius200.Click += EventHandler(Rad200); //clicking on radius200, will call upon Rad200, which sets the circle. no drawing,
+so what happens when you click on the draw function? it connects to the following function below
+  protected void DrawFunction(Object, EventArgs e){   //dummy parameters
+      switch(radius)
+      {
+        case 200:
+          color200=c;
+          break;
+        case 600:
+          color600=c;
+          break;
+        case 400:
+          color400=c;
+          break;
+      }
+      Invalidate(); //this calls the OnPaint function.
+    }
+
+    protected override void OnPaint(PaintEventArgs anything){
+      Graphics area = anything.Graphics;  //makes a copy of the class Graphics
+      pen.Color = Color200;   //this gives us something to write with
+      area.DrawEllipse(pen, x,y, 2*200, 2*200); //we're doubling to make the diameter
+      pen.Color = Color400;
+      area.DrawEllipse(pen, a,b, 2*400, 2*400);
+      pen.Color = Color600;
+      area.DrawEllipse(pen, c,d, 2*600, 2*600);
+      //this is all local copies so we need to send these out to be a permanent copy
+      base.OnPaint(anything);
+    }
+
+
+  the user interface class: you want to describe what the customer says, in your constructor if you say
+  .Title = "Welcome"; //refers to the entire Window
+so if you say:
+  Background = Color.Pink;
+the entire window will be the entire window to be pink, so if we say
+  Size = new Size
+
+to create that seperate "Window" or area that will hold all your buttons etc:
+  FillRectangle = (brush.Yellow, 0, 700, 1000, 100);
+
+
+
+
+//all of this goes above of the lecture that is shown above
+preotected override void OnPaint(PaintEventArgs e){
+  Graphics area - e.Graphics;
+  pen.Color = Color200;
+  info = CircleAlgorithms.getcircleinfo(1400,874,200);
+  //area.DrawEllipse(pen,x,y,z,w);\\dont use
+  area.DrawEllipse(pen,info);
+
+}
+
+//this would be in a different file because it's pure algorithm
+public class CircleAlgorithms{
+  public status System.Drawing.Rectangle
+  getcircleinfo(int graphareawidth, int graphareaheight, int radius){
+   Point corner = new Point(graphareawidth/2 -radius, graphicalareaheight/2 - radius);  //the concept is we find the center of the graphical area of our field.
+   Size lenwide = new Size(2*radius, 2* radius);
+   Rectangle rect = new Rectangle(corner, lenwide);
+   return rect;
+  } //end of function
+}//end of class
+
+
+
+
+
+
+
+
+
+
+
+the user interface class is not intended to do a lot of math, so we need to put all the algorithm that we just did into a separate file (aka business logic)

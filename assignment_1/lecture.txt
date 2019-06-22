@@ -1,0 +1,75 @@
+the book for the class usually call the controls that go within the user interface called "controls". Remember that the UI
+is just simply a rectangle of pixels.
+
+
+let's say we have a class called Banking : Form
+{
+  private const int height = 800;
+
+  //constants are declared here such as:
+    Button computer = new Button()
+    Button quit = new Button()
+
+  //constructor made here
+      within the constructor we have this line
+            Controls.add(quitbutton);
+            compute.Click += new EventHandler(Manage);  //this says that when this object gets mouse clicked, it called Manage function
+      this shows the quit button at the bottom of the UI.
+}
+
+public Bank(){
+bluepen=new Pen(Color.Blue, 3);
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~How do you change the UI?~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  this will repaint the entire picture -as said by the professor:
+
+protected override voidd OnPaint(PaintEventArgs image ){
+  Graphics whiteboard = image.Graphics; //image is a reserved word
+  whiteboard.DrawLine(bluepen, 0,650,1200,650 )   //we're telling it to use a certain pen:(bluepen, how far from the right and how far down, how far to extend and how much to extend the shape down)
+  whiteboard.FillRectangle(brush, 0,650,1200,150);
+
+  base.OnPaint(image);    //it takes the image you've written on and makes it permanent on the UI. it calls OnPaint in the parent class that is located in Form and returns it
+}
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+protected void Manage(){
+  Invalidate();   //if this is called, then it called protected override void OnPaint function....
+}
+
+
+within the constructor we create the the function pen
+private Pen bluepen = new Pen (Color.Blue, 3)   //the bluepen is 3pixels wide
+//now we cna use it in the draw functions now
+
+priate Brushes brush = new Brushes(Color.Yellow);
+
+
+
+
+
+
+
+
+
+
+
+
+//NOTE
+  class name uppercase
+  function name
+  object is usually lowercase
+
+
+
+
+
+
+
+
+
+  at the bottom off the window should be the buttons red green and blue followed by the sizes (take a picture).
+  take a class and inheirt it from Form
+  the user should be able to chnage their mind about which size and color to use, so we should be able to store the last
+    option choosen, (should not be drawn until the user clicks draw)

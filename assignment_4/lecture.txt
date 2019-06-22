@@ -1,0 +1,4 @@
+if(y+2*radius = formheight -1)  //this is a collision with the south wall
+if(x+2* radius = formwidth-1) //this is a collision with the right wall
+if y==0 //this is a collision with the north wall
+if x==0 collision with the left wall

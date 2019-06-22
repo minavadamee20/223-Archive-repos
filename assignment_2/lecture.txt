@@ -1,0 +1,69 @@
+The basic function of a very simple click is to tic (not give hours and minutes),
+  c# has basic clicls.... the next homework uses 1 click.
+Clicks (in c#) can be set to tic at different speeds. Usually, w=speed is given in Hertz as in
+  20 Hz,10Hz, etc. Higher Hz means a faster clock.
+
+the formula:
+    Interval = 1000/speed (the answer will be in miliseconds)
+  example: Suppose the speed is 20Hz, then the interval = [(1000ms/1sec)/(20tic/1sec)] = 50 ms/tic
+           Suppose the speed is 60Hz, then the intveral = {(1000ms/1sec)/(60tic/1sec)} = 17 ms/tic
+  Our homework is going to require these intervals.... so going back to c#
+
+  [in the user interface class before the constructor variables.]
+        private static System.Timer.Timer seko
+  we can construct inside the UI class constructor:
+        seko= System.Timers.Timer();
+      P R O P E R T I E S
+    to start the clock:
+      seko.Enabled = true; //start ticking
+      seko.Enabled = false; //stop ticking
+      seko.Interval = 4; //sets 4 miliseconds before each tick.
+      Seko.Interval = 1000;
+we want to activate the clock like clicking a button will activate a function
+
+    //set handler for seko at the same place where buttons get handlers
+      seko.Elapsed = new ElapsedEventHandler(seko-function);
+below the constructor OnPaint
+  protected void seko_function(System.Object s, ElapsedEventArgs e){
+  //any code you want
+  }
+==== look for simple_clock online ===
+
+
+
+--->[OCTOBER 1 2018 notes]<---
+
+you should look for asignment3 at funwithlinux.club.
+we are creating a ball that will move smoothly along a line, this is our intro to animation. the biggest thing is that this assignment will require two clocks.
+  MotionLCock <--- clock controlling the ball
+  RefreshClock
+
+coordinates of the ball is updated 20times/sec
+the ball is sitting in an invisible rectangle, and we have to decide whether the top left of the rectangle of the ball or the center of the ball would be, on the "center". the line will call for the center of
+the ball and whatever we defined the center to be will be on the line. So we need the center of the ball to be on the line. so going back to MotionLCock
+    private static Systems.Timers.Tier ball_motion_clock = new system.timers.timer();
+We need to set the interval of the clock that we made.
+  ball_motion_clock.Interval = 1000/20; ---> 20times/sec
+  ball_motion_clock.Interval = (int)System.Math.Round(1000.0/inputHertz)  <---both are double
+  ball_motion_clock += new ElapsedEventHandler(Update_ball);
+
+  protected void update_ball(Object sender, ElapsedEventArgs e){
+  switch(direction){
+  case 'N': ball_y = ball_y - distancepertic;
+            break;
+  case 'W': ball_x = ball_x - distancepertic;
+            break;
+  case 'S': //same
+  case 'E': //sane
+      }
+  }
+this is updating the position of the object. We can use invalidate but that's not proper to call Invalidate. If you have a animated object moving around, you internally store it. The location will be stored
+within the internal memory, but it won't display where it is every time it is called. all the speed of the ball, are controlled by the ball_motion_clock
+
+class ball {
+double x_coor;
+double y_coor;
+  ball tennisball;    //??????/
+}
+
+just make UI and he'll explain more next class lecture. 

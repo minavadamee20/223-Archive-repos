@@ -1,0 +1,7 @@
+some notes that will help with this project,
+
+if(d(center, click) < rad) appleVisible = false;
+
+
+DoubleBuffered = true;
+    ^^ many times (but not always) this one statement will eliminate ghost images or shadows to moving images

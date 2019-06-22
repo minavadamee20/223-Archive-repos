@@ -1,0 +1,70 @@
+how to draw a graph
+  examples: y=x^2
+            y=log(x)
+            y=sin(x)
+but some cannot be expressed as the ones that are displayed above, so when concerning c# we do the following
+double scalefactor - 100.0;
+x_origin = 400.0
+y_origin = 300.0
+double t =0.0;
+            these above values are fixed
+protected override OnPaint(PaintEventArgs e){
+Graphics display = e.Graphics;
+  //first we want to have a dot on the screen somewhere that will represent the center of the FillEllipse
+  display.FillEllipse(Brushes.Red, x,y,(int)radius, (int)radius);
+  //x and y are integers coordinates of upper left corner of the surrounding box.
+
+}
+
+
+
+      there's a whole sequence of coordinate changes but we'll get that later
+the motion clock has a handler function
+  dot_motion.Elapsed t = new ElapsedEventHandler(update_dot); //the dot that will move around the circle
+  protected void update_dot(System.Object sender, ElapsedEventArgs a){
+    //with each tic of the movement clock we're going to update t that has been declared at the beginning
+    t = t+ delta;
+    //when you compute the position with respects to the coordineates, you get the math coordineates
+    x_math = 6.0cos(t);
+    y_math = 4.0sin(t);
+
+    //we cant assign a pixel per little tic on the cartesian graph that we've made up that is overlaied on the graphical interface bottomPanel_Location_height, we need to put like maybe 100. so we're going to scale it
+    x_scaled = x_math*scalefactor;
+    y_scaled = y_math*scalefactor;  //scalefactor is some sort of constant that we made up
+
+    x_csharp = x_scaled + x_origin;
+    y_csharp = y_scaled + y_origin;
+
+    x_up_corner = x_csharp -dot_radius;
+    y_up_corner = y_csharp - dot_radius;
+
+    x = (int)System.Math.Round(x_up_corner);
+    y = (int)System.Math.Round(y_up_corner);
+  }//end of update_dot function
+
+
+//so there's two clocks ticking, the more important clock is the motion/animation clock, and everytime it ticks it gets a new x and y that we just did above
+    do computer graphics in type double when they're just discrete pixels.
+    by trial and error you'll have to adjust delta, which will be quite small
+
+      //this is all on scratch paper\\
+but there's one thing missing; it will not move at a fixed speed, it will go faster around the curved pieces
+so the last step is to fix this issue. and the way that's fixed is by fixing the function t = t + delta;
+t = t + delta/sqrt((x')t^2 + (y')t^2)
+x(t) = 6.0cos(t);
+y(t) = 4.0sin(t);
+x'(t) = -6.0sin(t)
+y'(t) = 4.-cos(t)
+x'(t^2) = 36sin^2(t);
+y'(t^2) = 16cos^2(t);
+sum = 36sin^2(t) + 16cos^2(t)
+  =20sin^2(t) + 16sin^2(t) + 16cos^2(t)
+  = 16+20sin^2(t)
+
+  so now we want to declare a variable called derivative, it's declared earlier but now we're going to implement it
+  double derivative = System.Math.Sqrt(16.0+20.0*System.Math.Sin(t)*System.Math.Sin(t));
+    so now the function is
+    t = t + delta/derivative;
+
+  so now even weird tangent lines will have a dot that will constant rate
+  this will be in the next lecture maybe next week
